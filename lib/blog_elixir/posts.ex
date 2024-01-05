@@ -1,9 +1,10 @@
 defmodule BlogElixir.Posts do
   @moduledoc """
   The Posts context.
+  Whole module is a set of CRUD functions for our Posts
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.Query, warn: false #needed for datamanipulating in DB
   alias BlogElixir.Repo
 
   alias BlogElixir.Posts.Post
@@ -19,6 +20,17 @@ defmodule BlogElixir.Posts do
   """
   def list_posts do
     Repo.all(Post)
+  end
+
+  @doc """
+    Finds a post by title using SQL query
+  """
+  def list_posts(title) do
+    search = "%#{title}%"
+    #ilike allows us to search a case insensitive string. The % symbol acts as a wildcard to find partially matching searches.
+    query = from p in Post, where: ilike(p.title, ^search)
+
+    Repo.all(query)
   end
 
   @doc """
