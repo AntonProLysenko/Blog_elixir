@@ -6,7 +6,7 @@ defmodule Blog.PostsTest do
   describe "posts" do
     alias Blog.Posts.Post
 
-    import Blog.PostsFixtures
+    import Blog.PostsFixtures# has a post_ficture function and it is creates a post with some default vals
 
     @invalid_attrs %{title: nil, subtitle: nil, content: nil}
 
